@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>{{ hero.name }}</mat-card-title>
+  </mat-card-header>
+  <div class="card-canvas" id="img-container" (click)="onClick()">
+    <img
+      class="hero-img card-canvas"
+      mat-card-image
+      [src]="hero.url"
+      alt="{{ 'Photo of ' + hero.name }}"
+    />
+  </div>
+  <mat-card-content *ngIf="showDescription">
+    <div (click)="onClick()" class="card-canvas">
+      <p>
+        {{ hero.description }}
+      </p>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="onClick()" mat-stroked-button color="accent" aria-label="Proceed">
+      Read more
+    </button>
+  </mat-card-actions>
+</mat-card>

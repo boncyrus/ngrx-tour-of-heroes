@@ -1,0 +1,27 @@
+@import "variables";
+
+:host {
+  transition: all 0.5s;
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.avatar {
+  background-color: $secondary-color !important;
+}
+
+#img-container {
+  margin-top: 10px;
+}
+
+.hero-img {
+  background-size: cover;
+  background-position: center;
+}
+
+.card-canvas {
+  &:hover {
+    cursor: pointer;
+  }
+}
