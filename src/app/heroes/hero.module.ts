@@ -8,6 +8,7 @@ import { StoreModule } from "@ngrx/store";
 import { EffectsModule } from "@ngrx/effects";
 import { HeroEffects } from "./store/effects/hero.effects";
 import * as fromStore from "./store";
+import { HeroDetailsComponent } from "./hero-details/hero-details.component";
 
 @NgModule({
   imports: [
@@ -15,8 +16,18 @@ import * as fromStore from "./store";
     EffectsModule.forFeature([HeroEffects]),
     SharedModule
   ],
-  declarations: [HeroEditorComponent, HeroListComponent, HeroEditComponent],
-  exports: [HeroEditorComponent, HeroListComponent, HeroEditComponent],
+  declarations: [
+    HeroEditorComponent,
+    HeroListComponent,
+    HeroEditComponent,
+    HeroDetailsComponent
+  ],
+  exports: [
+    HeroEditorComponent,
+    HeroListComponent,
+    HeroEditComponent,
+    HeroDetailsComponent
+  ],
   providers: [HeroService, HeroEffects]
 })
 export class HeroModule {}

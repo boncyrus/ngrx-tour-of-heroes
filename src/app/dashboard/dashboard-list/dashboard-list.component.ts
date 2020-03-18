@@ -2,6 +2,7 @@ import { Store } from "@ngrx/store";
 import { AppState } from "@shared/models/appState";
 import { Hero } from "@shared/models/hero";
 import { Component, OnInit, Input } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "bcm-dashboard-list",
@@ -11,9 +12,11 @@ import { Component, OnInit, Input } from "@angular/core";
 export class DashboardListComponent implements OnInit {
   @Input() public heroes: Hero[];
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {}
 
   public onClick(hero: Hero): void {
-    console.log("hero was clicked", hero);
+
   }
 }
