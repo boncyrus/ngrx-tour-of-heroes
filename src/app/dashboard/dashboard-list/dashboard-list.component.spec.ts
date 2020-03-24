@@ -3,23 +3,26 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DashboardListComponent } from './dashboard-list.component';
 
 describe('DashboardListComponent', () => {
-  let component: DashboardListComponent;
-  let fixture: ComponentFixture<DashboardListComponent>;
+    let component: DashboardListComponent;
+    let fixture: ComponentFixture<DashboardListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ DashboardListComponent ]
-    })
-    .compileComponents();
-  }));
+    beforeEach(
+        async(() => {
+            TestBed.configureTestingModule({
+                declarations: [
+                    DashboardListComponent
+                ]
+            }).compileComponents();
+        })
+    );
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardListComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(DashboardListComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });
