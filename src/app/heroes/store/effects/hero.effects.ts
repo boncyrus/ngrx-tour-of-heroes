@@ -63,7 +63,7 @@ export class HeroEffects {
             ofType(HeroActions.updateHero),
             mergeMap((data) => {
                 return this.heroService.update(data.hero.id, data.hero).pipe(
-                    map((hero) => {
+                    map(() => {
                         return HeroActions.updateHeroCompleted({
                             state: CompletionState.Success,
                             data: data.hero

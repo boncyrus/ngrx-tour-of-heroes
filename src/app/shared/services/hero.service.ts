@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BaseApiService } from './baseApi.service';
 import { map } from 'rxjs/operators';
+import { heroList } from '../data/fakeData';
 
 @Injectable()
 export class HeroService extends BaseApiService<Hero> {
@@ -24,6 +25,13 @@ export class HeroService extends BaseApiService<Hero> {
     }
 
     update(id: number, entity: Hero): Observable<any> {
-        return this.httpClient.put<Hero>(`heroes/${id}`, entity);
+        const update$ = this.httpClient.put<Hero>(`heroes/${id}`, entity);
+        const subscription = update$.subscribe(() => {
+            const index = heroList.findIndex((y) => entity.id == y.id);
+            heroList[index] = entity;
+            subscription.unsubscribe();
+        });
+
+        return update$;
     }
 }

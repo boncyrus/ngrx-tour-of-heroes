@@ -42,7 +42,6 @@ export class HeroEditorComponent implements OnInit {
 
     public ngOnInit(): void {
         this.hero$.subscribe((hero) => {
-            console.log('subscribe', hero);
             this.hero = hero;
             this.heroForm.get('id').setValue(hero.id);
             this.heroForm.get('url').setValue(hero.url);
