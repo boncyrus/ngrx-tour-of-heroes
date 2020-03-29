@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BaseApiService } from './baseApi.service';
-import { take, map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class HeroService extends BaseApiService<Hero> {
@@ -23,7 +23,7 @@ export class HeroService extends BaseApiService<Hero> {
         return this.httpClient.get<Hero>(`heroes/${id}`);
     }
 
-    update(entity: Hero): Observable<Hero> {
-        return this.httpClient.put<Hero>(`heroes/${entity.id}`, entity);
+    update(id: number, entity: Hero): Observable<any> {
+        return this.httpClient.put<Hero>(`heroes/${id}`, entity);
     }
 }

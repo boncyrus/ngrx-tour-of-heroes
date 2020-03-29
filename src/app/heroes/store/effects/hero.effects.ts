@@ -57,4 +57,28 @@ export class HeroEffects {
             })
         )
     );
+
+    updateHero$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(HeroActions.updateHero),
+            mergeMap((data) => {
+                return this.heroService.update(data.hero.id, data.hero).pipe(
+                    map((hero) => {
+                        return HeroActions.updateHeroCompleted({
+                            state: CompletionState.Success,
+                            data: data.hero
+                        });
+                    }),
+                    catchError((err) =>
+                        of(
+                            HeroActions.updateHeroCompleted({
+                                state: CompletionState.Failure,
+                                message: err
+                            })
+                        )
+                    )
+                );
+            })
+        )
+    );
 }

@@ -16,7 +16,9 @@ const initialState: HeroDetailsState = {
 const heroDetailsReducer = createReducer(
     initialState,
     on(Actions.getHeroById, (state) => ({ ...state, loading: true })),
-    on(Actions.getHeroByIdCompleted, (state, action) => ({ ...state, hero: action.data, loading: false }))
+    on(Actions.getHeroByIdCompleted, (state, action) => ({ ...state, hero: action.data, loading: false })),
+    on(Actions.updateHero, (state) => ({ ...state, loading: true })),
+    on(Actions.updateHeroCompleted, (state, action) => ({ ...state, hero: action.data, loading: false }))
 );
 
 export function reducer(state: HeroDetailsState, action: Action) {

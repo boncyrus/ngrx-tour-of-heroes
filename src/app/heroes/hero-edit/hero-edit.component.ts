@@ -35,4 +35,12 @@ export class HeroEditComponent implements OnInit {
             })
         );
     }
+
+    public onHeroSave(hero: Hero): void {
+        this.store.dispatch(
+            Actions.updateHero({
+                hero: hero
+            })
+        );
+    }
 }
