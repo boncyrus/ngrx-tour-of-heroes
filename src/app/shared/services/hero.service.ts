@@ -22,4 +22,8 @@ export class HeroService extends BaseApiService<Hero> {
     getById(id: number): Observable<Hero> {
         return this.httpClient.get<Hero>(`heroes/${id}`);
     }
+
+    update(entity: Hero): Observable<Hero> {
+        return this.httpClient.put<Hero>(`heroes/${entity.id}`, entity);
+    }
 }
