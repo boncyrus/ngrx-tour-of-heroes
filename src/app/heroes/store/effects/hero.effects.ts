@@ -33,4 +33,28 @@ export class HeroEffects {
             )
         )
     );
+
+    getHeroById$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(HeroActions.getHeroById),
+            mergeMap((data) => {
+                return this.heroService.getById(data.id).pipe(
+                    map((hero) => {
+                        return HeroActions.getHeroByIdCompleted({
+                            state: CompletionState.Success,
+                            data: hero
+                        });
+                    }),
+                    catchError((err) =>
+                        of(
+                            HeroActions.getHeroByIdCompleted({
+                                state: CompletionState.Failure,
+                                message: err
+                            })
+                        )
+                    )
+                );
+            })
+        )
+    );
 }

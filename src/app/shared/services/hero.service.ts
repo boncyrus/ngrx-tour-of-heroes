@@ -19,7 +19,7 @@ export class HeroService extends BaseApiService<Hero> {
         return this.httpClient.get<Array<Hero>>('heroes').pipe(map((data) => data.slice(0, 4)));
     }
 
-    getById(id: number) {
-        return this.httpClient.get<Hero>('heroes').pipe(filter((x) => x.id === id));
+    getById(id: number): Observable<Hero> {
+        return this.httpClient.get<Hero>(`heroes/${id}`);
     }
 }

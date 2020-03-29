@@ -7,25 +7,32 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { LoaderComponent } from './components/loader/loader.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
     declarations: [
-        HeroCardComponent
+        HeroCardComponent,
+        LoaderComponent
     ],
     imports: [
         CommonModule,
         MatCardModule,
         MatInputModule,
         MatButtonModule,
-        MatIconModule
+        MatIconModule,
+        MatProgressSpinnerModule,
+        ReactiveFormsModule
     ],
     exports: [
-        HeroCardComponent,
         CommonModule,
+        HeroCardComponent,
+        LoaderComponent,
         MatCardModule,
         MatInputModule,
         MatButtonModule,
         MatIconModule,
+        MatProgressSpinnerModule,
         ReactiveFormsModule
     ],
     providers: [

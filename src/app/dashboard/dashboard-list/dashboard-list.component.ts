@@ -18,5 +18,11 @@ export class DashboardListComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    public onClick(hero: Hero): void {}
+    public onClick(hero: Hero): void {
+        this.router.navigate([
+            'heroes',
+            'details',
+            hero.id
+        ]);
+    }
 }

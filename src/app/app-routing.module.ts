@@ -1,31 +1,19 @@
-import { HeroEditComponent } from './heroes/hero-edit/hero-edit.component';
-import { HomeComponent } from './dashboard/home/home.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HeroDetailsComponent } from './heroes/hero-details/hero-details.component';
 
 const routes: Routes = [
+    {
+        path: 'dashboard',
+        loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule)
+    },
+    {
+        path: 'heroes',
+        loadChildren: () => import('./heroes/hero.module').then((m) => m.HeroModule)
+    },
     {
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full'
-    },
-    {
-        path: 'dashboard',
-        component: HomeComponent
-    },
-    {
-        path: 'hero',
-        children: [
-            {
-                path: 'edit',
-                component: HeroEditComponent
-            },
-            {
-                path: 'details/:id',
-                component: HeroDetailsComponent
-            }
-        ]
     }
 ];
 

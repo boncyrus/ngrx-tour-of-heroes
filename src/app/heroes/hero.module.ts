@@ -9,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HeroEffects } from './store/effects/hero.effects';
 import * as fromStore from './store';
 import { HeroDetailsComponent } from './hero-details/hero-details.component';
+import { HeroRoutingModule } from './hero-routing.module';
 
 @NgModule({
     imports: [
@@ -16,15 +17,10 @@ import { HeroDetailsComponent } from './hero-details/hero-details.component';
         EffectsModule.forFeature([
             HeroEffects
         ]),
-        SharedModule
+        SharedModule,
+        HeroRoutingModule
     ],
     declarations: [
-        HeroEditorComponent,
-        HeroListComponent,
-        HeroEditComponent,
-        HeroDetailsComponent
-    ],
-    exports: [
         HeroEditorComponent,
         HeroListComponent,
         HeroEditComponent,

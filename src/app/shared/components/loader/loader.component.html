@@ -1,0 +1,8 @@
+<div class="root-container" *ngIf="isBusy">
+    <mat-progress-spinner mode="indeterminate">
+    </mat-progress-spinner>
+</div>
+
+<ng-container *ngIf="!isBusy">
+    <ng-content></ng-content>
+</ng-container>

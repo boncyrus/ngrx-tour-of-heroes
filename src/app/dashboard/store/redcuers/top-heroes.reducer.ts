@@ -1,6 +1,7 @@
 import { Hero } from '@shared/models/hero';
 import { createReducer, on } from '@ngrx/store';
 import { Actions } from '../actions/top-heroes.actions';
+import { AppState } from '@app/shared/models';
 
 export interface DashboardState {
     loading: boolean;
@@ -25,3 +26,6 @@ const heroListReducer = createReducer(
 export function reducer(state: DashboardState, action) {
     return heroListReducer(state, action);
 }
+
+export const topHeroesLoading = (state: DashboardState) => state.loading;
+export const topHeroes = (state: DashboardState) => state.heroes;

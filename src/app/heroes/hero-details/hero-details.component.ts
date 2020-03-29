@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable, of } from 'rxjs';
+import { Hero } from '@shared/models/hero';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AppState } from '@app/shared/models';
+import { switchMap, delay } from 'rxjs/operators';
+import { Actions } from '../store/actions/hero.actions';
+import * as fromStore from '../store';
 
 @Component({
     selector: 'bcm-hero-details',
@@ -8,7 +16,25 @@ import { Component, OnInit } from '@angular/core';
     ]
 })
 export class HeroDetailsComponent implements OnInit {
-    constructor() {}
+    public hero: Hero;
+    public hero$: Observable<Hero>;
+    public loading$: Observable<boolean> = of(false);
+    constructor(private route: ActivatedRoute, private store: Store<AppState>) {}
 
-    ngOnInit(): void {}
+    public ngOnInit(): void {
+        this.loading$ = this.store.select(fromStore.selectHeroDetailsLoading).pipe(delay(0));
+
+        this.hero$ = this.route.params.pipe(
+            switchMap((p) => {
+                const id = p['id'];
+                this.store.dispatch(
+                    Actions.getHeroById({
+                        id: id
+                    })
+                );
+
+                return this.store.select(fromStore.selectHeroDetailsHero);
+            })
+        );
+    }
 }

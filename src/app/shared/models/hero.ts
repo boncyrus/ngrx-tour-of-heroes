@@ -5,3 +5,11 @@ export interface Hero {
     url?: string;
     powerLevel?: number;
 }
+
+export const emptyHero: Hero = {
+    id: 0,
+    name: '',
+    description: '',
+    url: '',
+    powerLevel: 0
+};

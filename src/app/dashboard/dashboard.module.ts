@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import * as fromStore from './store';
 import { HeroService } from '@shared/services/hero.service';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { HeroService } from '@shared/services/hero.service';
         EffectsModule.forFeature([
             DashboardEffects
         ]),
-        SharedModule
+        SharedModule,
+        DashboardRoutingModule
     ],
     declarations: [
         HomeComponent,

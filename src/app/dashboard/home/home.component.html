@@ -1,1 +1,5 @@
-<bcm-dashboard-list [heroes]="heroes$ | async"></bcm-dashboard-list>
+
+<bcm-loader [isBusy]="loading$ | async">
+    <h1 class="text-light ">Dashboard</h1>
+    <bcm-dashboard-list [heroes]="heroes$ | async"></bcm-dashboard-list>
+</bcm-loader>

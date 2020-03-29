@@ -2,7 +2,7 @@
   <bcm-hero-card
     class="align-self-stretch col-lg-4 col-md-6 col-sm-6 mb-4"
     [hero]="hero"
-    (click)="onClick($event)"
+    (cardClick)="onClick($event)"
     *ngFor="let hero of heroes"
   ></bcm-hero-card>
 </div>

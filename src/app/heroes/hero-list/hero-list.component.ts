@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Hero } from '@shared/models/hero';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeroListResolverKeys } from './hero-list.keys';
 
 @Component({
     selector: 'bcm-hero-list',
@@ -11,11 +13,16 @@ import { Hero } from '@shared/models/hero';
 export class HeroListComponent implements OnInit {
     @Input() public heroes: Hero[];
 
-    constructor() {}
+    constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
 
-    ngOnInit(): void {}
+    public ngOnInit(): void {
+        this.heroes = this.activatedRoute.snapshot.data[HeroListResolverKeys.HEROES];
+    }
 
     public onClick(hero: Hero): void {
-        console.log('hero was clicked', hero);
+        this.router.navigate([
+            'details',
+            hero.id
+        ]);
     }
 }

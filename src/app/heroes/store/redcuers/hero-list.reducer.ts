@@ -2,12 +2,12 @@ import { Hero } from '../../../shared/models/hero';
 import { on, createReducer, Action } from '@ngrx/store';
 import { Actions } from '../actions/hero.actions';
 
-export interface HeroState {
+export interface HeroListState {
     loading: boolean;
     heroes: Hero[];
 }
 
-const initialState: HeroState = {
+const initialState: HeroListState = {
     loading: false,
     heroes: []
 };
@@ -22,6 +22,9 @@ const heroListReducer = createReducer(
     }))
 );
 
-export function reducer(state: HeroState, action: Action) {
+export function reducer(state: HeroListState, action: Action) {
     return heroListReducer(state, action);
 }
+
+export const heroListHeroes = (state: HeroListState) => state.heroes;
+export const heroListLoading = (state: HeroListState) => state.loading;

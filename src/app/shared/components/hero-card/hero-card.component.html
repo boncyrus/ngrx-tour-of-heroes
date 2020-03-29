@@ -10,14 +10,14 @@
       alt="{{ 'Photo of ' + hero.name }}"
     />
   </div>
-  <mat-card-content *ngIf="showDescription">
+  <mat-card-content *ngIf="viewMode === 'full'">
     <div (click)="onClick()" class="card-canvas">
       <p>
         {{ hero.description }}
       </p>
     </div>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions *ngIf="viewMode === 'condensed'">
     <button
       (click)="onClick()"
       mat-stroked-button
