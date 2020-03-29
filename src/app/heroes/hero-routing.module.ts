@@ -1,4 +1,4 @@
-import { SampleComponent } from './sample-component/sample.component';
+import { HeroEditComponent } from './hero-edit/hero-edit.component';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -17,6 +17,10 @@ const routes: Routes = [
     {
         path: 'details/:id',
         component: HeroDetailsComponent
+    },
+    {
+        path: 'details/:id/edit',
+        component: HeroEditComponent
     }
 ];
 

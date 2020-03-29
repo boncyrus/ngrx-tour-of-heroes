@@ -17,14 +17,27 @@
       </p>
     </div>
   </mat-card-content>
-  <mat-card-actions *ngIf="viewMode === 'condensed'">
-    <button
-      (click)="onClick()"
-      mat-stroked-button
-      color="accent"
-      aria-label="Proceed"
-    >
-      Read more
-    </button>
-  </mat-card-actions>
+  <ng-container [ngSwitch]="viewMode">
+    <mat-card-actions *ngSwitchCase="'condensed'">
+      <button
+        (click)="onClick()"
+        mat-stroked-button
+        color="accent"
+        aria-label="Read more"
+      >
+        Read more
+      </button>
+    </mat-card-actions>
+
+    <mat-card-actions *ngSwitchCase="'full'">
+      <button
+        (click)="onCardActionClick()"
+        mat-stroked-button
+        color="accent"
+        aria-label="Edit"
+      >
+        Edit
+      </button>
+    </mat-card-actions>
+  </ng-container>
 </mat-card>

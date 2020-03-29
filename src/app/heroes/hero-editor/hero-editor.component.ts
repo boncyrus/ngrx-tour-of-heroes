@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs';
 import { Hero } from '@shared/models/hero';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, NgZone } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -10,7 +11,8 @@ import { Validators, FormBuilder } from '@angular/forms';
     ]
 })
 export class HeroEditorComponent implements OnInit {
-    @Input() public hero: Hero;
+    @Input() public hero$: Observable<Hero>;
+    public hero: Hero;
 
     get heroName(): string {
         return this.heroForm.get('name').value;
@@ -24,12 +26,30 @@ export class HeroEditorComponent implements OnInit {
         id: [
             '',
             Validators.required
+        ],
+        description: [
+            '',
+            Validators.required
+        ],
+        url: [
+            ''
         ]
     });
 
     constructor(private fb: FormBuilder) {}
 
-    ngOnInit(): void {
-        this.heroForm.setValue(this.hero);
+    public ngOnInit(): void {
+        this.hero$.subscribe((hero) => {
+            this.hero = hero;
+            this.heroForm.get('id').setValue(hero.id);
+            this.heroForm.get('url').setValue(hero.url);
+            this.heroForm.get('description').setValue(hero.description);
+            this.heroForm.get('name').setValue(hero.name);
+        });
+    }
+
+    public onSubmit(): void {
+        if (this.heroForm.valid) {
+        }
     }
 }

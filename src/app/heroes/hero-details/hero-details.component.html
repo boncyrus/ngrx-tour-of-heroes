@@ -1,4 +1,4 @@
 <bcm-loader [isBusy]="loading$ | async">
-    <bcm-hero-card [viewMode]="'full'" [hero]="hero$ | async"></bcm-hero-card>
+    <bcm-hero-card (cardActionClick)="onCardActionClick($event)" [viewMode]="'full'" [hero]="hero$ | async"></bcm-hero-card>
 </bcm-loader>
 

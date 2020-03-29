@@ -1,5 +1,12 @@
+import { Observable, of } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { Hero } from '@shared/models/hero';
 import { Component, OnInit, Input } from '@angular/core';
+import { AppState } from '@app/shared/models';
+import * as fromStore from '../store';
+import { delay, switchMap } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
+import { Actions } from '../store/actions/hero.actions';
 
 @Component({
     selector: 'bcm-hero-edit',
@@ -9,8 +16,23 @@ import { Component, OnInit, Input } from '@angular/core';
     ]
 })
 export class HeroEditComponent implements OnInit {
-    @Input() public hero: Hero;
-    constructor() {}
+    @Input() public hero$: Observable<Hero>;
+    public loading$: Observable<boolean> = of(false);
+    constructor(private store: Store<AppState>, private route: ActivatedRoute) {}
 
-    ngOnInit(): void {}
+    public ngOnInit(): void {
+        this.loading$ = this.store.select(fromStore.selectHeroDetailsLoading).pipe(delay(0));
+        this.hero$ = this.route.params.pipe(
+            switchMap((p) => {
+                const id = p['id'];
+                this.store.dispatch(
+                    Actions.getHeroById({
+                        id: id
+                    })
+                );
+
+                return this.store.select(fromStore.selectHeroDetailsHero);
+            })
+        );
+    }
 }
