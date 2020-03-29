@@ -25,4 +25,11 @@ export class HeroListComponent implements OnInit {
             hero.id
         ]);
     }
+
+    public onAddClick() {
+        this.router.navigate([
+            'heroes',
+            'add'
+        ]);
+    }
 }

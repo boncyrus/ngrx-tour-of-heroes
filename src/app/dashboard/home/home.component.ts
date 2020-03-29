@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Hero } from '@shared/models/hero';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
     public heroes$: Observable<Hero[]>;
     public loading$: Observable<boolean> = of(false);
 
-    constructor(private store: Store<AppState>) {}
+    constructor(private store: Store<AppState>, private router: Router) {}
 
     public ngOnInit(): void {
         this.heroes$ = this.store.select(fromStore.selectTopHeroes);

@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { Hero } from '@shared/models/hero';
 import { Component, OnInit, Input, ViewChild, NgZone, Output, EventEmitter } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'bcm-hero-editor',
@@ -12,33 +12,29 @@ import { Validators, FormBuilder } from '@angular/forms';
 })
 export class HeroEditorComponent implements OnInit {
     @Input() public hero$: Observable<Hero>;
-    public hero: Hero;
-
     @Output() public save: EventEmitter<Hero> = new EventEmitter<Hero>();
+    public hero: Hero;
+    public heroForm: FormGroup;
 
-    get heroName(): string {
-        return this.heroForm.get('name').value;
+    constructor(private fb: FormBuilder) {
+        this.heroForm = this.fb.group({
+            name: [
+                '',
+                Validators.required
+            ],
+            id: [
+                '',
+                Validators.required
+            ],
+            description: [
+                '',
+                Validators.required
+            ],
+            url: [
+                ''
+            ]
+        });
     }
-
-    public heroForm = this.fb.group({
-        name: [
-            '',
-            Validators.required
-        ],
-        id: [
-            '',
-            Validators.required
-        ],
-        description: [
-            '',
-            Validators.required
-        ],
-        url: [
-            ''
-        ]
-    });
-
-    constructor(private fb: FormBuilder) {}
 
     public ngOnInit(): void {
         this.hero$.subscribe((hero) => {

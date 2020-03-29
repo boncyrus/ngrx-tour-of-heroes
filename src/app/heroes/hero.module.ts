@@ -10,6 +10,8 @@ import { HeroEffects } from './store/effects/hero.effects';
 import * as fromStore from './store';
 import { HeroDetailsComponent } from './hero-details/hero-details.component';
 import { HeroRoutingModule } from './hero-routing.module';
+import { HeroAddComponent } from './hero-add/hero-add.component';
+import { HeroAddFormComponent } from './hero-add-form/hero-add-form.component';
 
 @NgModule({
     imports: [
@@ -24,7 +26,9 @@ import { HeroRoutingModule } from './hero-routing.module';
         HeroEditorComponent,
         HeroListComponent,
         HeroEditComponent,
-        HeroDetailsComponent
+        HeroDetailsComponent,
+        HeroAddComponent,
+        HeroAddFormComponent
     ],
     providers: [
         HeroService,

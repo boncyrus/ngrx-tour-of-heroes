@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-content>
+        <form [formGroup]="form" class="mt-2" (ngSubmit)="onSubmit()">
+          <div>
+            <h2 class="text-secondary">Add Hero</h2>
+          </div>
+            <div class="row">
+              <div class="col-12">
+                <mat-form-field>
+                  <mat-label>Name</mat-label>
+                  <input
+                    formControlName="name"
+                    matInput
+                    placeholder="Enter hero's name"
+                    name="name"
+                  />
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                <mat-form-field>
+                  <mat-label>Description</mat-label>
+                  <textarea
+                    formControlName="description"
+                    matInput
+                    placeholder="Enter description"
+                    name="description"></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-12">
+                <mat-form-field>
+                  <mat-label>Image url</mat-label>
+                  <input
+                    formControlName="url"
+                    matInput
+                    placeholder="Enter image url"
+                    name="url" />
+                </mat-form-field>
+              </div>
+            </div>
+            <div>
+              <button type="submit" [disabled]="form.invalid" mat-flat-button name="save" color="primary">Save</button>
+            </div>
+          </form>
+    </mat-card-content>
+</mat-card>

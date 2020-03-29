@@ -2,7 +2,7 @@ import { HeroService } from '@shared/services/hero.service';
 import { Actions as HeroActions } from '../actions/hero.actions';
 import { Injectable } from '@angular/core';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CompletionState } from '@shared/models/completionResponse';
 
@@ -78,6 +78,39 @@ export class HeroEffects {
                         )
                     )
                 );
+            })
+        )
+    );
+
+    addHero$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(HeroActions.addHero),
+            mergeMap((data) => {
+                return this.heroService.create(data.hero).pipe(
+                    map(() => {
+                        return HeroActions.addHeroCompleted({
+                            state: CompletionState.Success,
+                            data: data.hero
+                        });
+                    }),
+                    catchError((err) =>
+                        of(
+                            HeroActions.addHeroCompleted({
+                                state: CompletionState.Failure,
+                                message: err
+                            })
+                        )
+                    )
+                );
+            })
+        )
+    );
+
+    addHeroCompleted = createEffect(() =>
+        this.actions$.pipe(
+            ofType(HeroActions.addHeroCompleted),
+            map(() => {
+                return HeroActions.getAllHeroes({});
             })
         )
     );

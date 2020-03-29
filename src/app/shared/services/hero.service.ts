@@ -25,13 +25,10 @@ export class HeroService extends BaseApiService<Hero> {
     }
 
     update(id: number, entity: Hero): Observable<any> {
-        const update$ = this.httpClient.put<Hero>(`heroes/${id}`, entity);
-        const subscription = update$.subscribe(() => {
-            const index = heroList.findIndex((y) => entity.id == y.id);
-            heroList[index] = entity;
-            subscription.unsubscribe();
-        });
+        return this.httpClient.put<Hero>(`heroes/${id}`, entity);
+    }
 
-        return update$;
+    create(entity: Hero): Observable<any> {
+        return this.httpClient.post<Hero>(`heroes`, entity);
     }
 }

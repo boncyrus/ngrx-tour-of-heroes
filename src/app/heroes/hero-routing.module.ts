@@ -1,3 +1,4 @@
+import { HeroAddComponent } from './hero-add/hero-add.component';
 import { HeroEditComponent } from './hero-edit/hero-edit.component';
 import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
@@ -15,12 +16,16 @@ const routes: Routes = [
         }
     },
     {
+        path: 'details/:id/edit',
+        component: HeroEditComponent
+    },
+    {
         path: 'details/:id',
         component: HeroDetailsComponent
     },
     {
-        path: 'details/:id/edit',
-        component: HeroEditComponent
+        path: 'add',
+        component: HeroAddComponent
     }
 ];
 

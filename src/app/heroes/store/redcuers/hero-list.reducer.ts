@@ -18,7 +18,9 @@ const heroListReducer = createReducer(
     on(Actions.getAllHeroesCompleted, (state, action) => ({
         ...state,
         loading: false,
-        heroes: action.data
+        heroes: [
+            ...action.data
+        ]
     }))
 );
 
