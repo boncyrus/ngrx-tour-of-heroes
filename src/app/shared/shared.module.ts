@@ -9,11 +9,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { DefaultImageDirective } from './directvies/default-image.directive';
 
 @NgModule({
     declarations: [
         HeroCardComponent,
-        LoaderComponent
+        LoaderComponent,
+        DefaultImageDirective
     ],
     imports: [
         CommonModule,
@@ -33,6 +35,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatButtonModule,
         MatIconModule,
         MatProgressSpinnerModule,
+        DefaultImageDirective,
         ReactiveFormsModule
     ],
     providers: [
