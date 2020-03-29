@@ -5,15 +5,11 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HeroListComponent } from './hero-list/hero-list.component';
 import { HeroDetailsComponent } from './hero-details/hero-details.component';
-import { HeroListResolver } from './hero-list';
 
 const routes: Routes = [
     {
         path: '',
-        component: HeroListComponent,
-        resolve: {
-            HEROES: HeroListResolver
-        }
+        component: HeroListComponent
     },
     {
         path: 'details/:id/edit',
@@ -36,8 +32,6 @@ const routes: Routes = [
     exports: [
         RouterModule
     ],
-    providers: [
-        HeroListResolver
-    ]
+    providers: []
 })
 export class HeroRoutingModule {}

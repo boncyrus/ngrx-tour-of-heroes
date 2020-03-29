@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoaderComponent } from './components/loader/loader.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { DefaultImageDirective } from './directvies/default-image.directive';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     declarations: [
@@ -24,6 +25,7 @@ import { DefaultImageDirective } from './directvies/default-image.directive';
         MatButtonModule,
         MatIconModule,
         MatProgressSpinnerModule,
+        MatSnackBarModule,
         ReactiveFormsModule
     ],
     exports: [
@@ -36,6 +38,7 @@ import { DefaultImageDirective } from './directvies/default-image.directive';
         MatIconModule,
         MatProgressSpinnerModule,
         DefaultImageDirective,
+        MatSnackBarModule,
         ReactiveFormsModule
     ],
     providers: [

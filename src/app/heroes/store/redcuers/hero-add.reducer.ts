@@ -4,11 +4,14 @@ import { Actions } from '../actions/hero.actions';
 
 export interface HeroAddState {
     loading: boolean;
-    hero?: Hero;
+    hero: Hero;
+    recent: Hero;
 }
 
 const initialState = {
-    loading: false
+    loading: false,
+    hero: null,
+    recent: null
 };
 
 export const heroAddReducer = createReducer(
@@ -21,6 +24,12 @@ export const heroAddReducer = createReducer(
         ...state,
         loading: false,
         hero: action.data
+    })),
+    on(Actions.addHeroInit, (state) => ({
+        ...state,
+        loading: false,
+        recent: { ...state.hero || null },
+        hero: null
     }))
 );
 

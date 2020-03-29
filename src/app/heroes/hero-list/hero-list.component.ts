@@ -1,7 +1,11 @@
+import { Observable, of } from 'rxjs';
+import { Store } from '@ngrx/store';
 import { Component, OnInit, Input } from '@angular/core';
 import { Hero } from '@shared/models/hero';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HeroListResolverKeys } from './hero-list.keys';
+import { Router } from '@angular/router';
+import { AppState } from '@app/shared/models';
+import { Actions } from '../store/actions/hero.actions';
+import * as fromStore from '../store';
 
 @Component({
     selector: 'bcm-hero-list',
@@ -11,12 +15,13 @@ import { HeroListResolverKeys } from './hero-list.keys';
     ]
 })
 export class HeroListComponent implements OnInit {
-    @Input() public heroes: Hero[];
+    public heroes$: Observable<Hero[]> = of([]);
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+    constructor(private router: Router, private store: Store<AppState>) {}
 
     public ngOnInit(): void {
-        this.heroes = this.activatedRoute.snapshot.data[HeroListResolverKeys.HEROES];
+        this.store.dispatch(Actions.getAllHeroes());
+        this.heroes$ = this.store.select(fromStore.selectHeroListHeroes);
     }
 
     public onClick(hero: Hero): void {

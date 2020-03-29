@@ -1,19 +1,27 @@
+import { Store } from '@ngrx/store';
 import { HeroService } from '@shared/services/hero.service';
 import { Actions as HeroActions } from '../actions/hero.actions';
 import { Injectable } from '@angular/core';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
-import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
+import { mergeMap, map, catchError, switchMap, tap, combineAll, concatMap, filter } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CompletionState } from '@shared/models/completionResponse';
+import { AppState } from '@app/shared/models';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
+const snackbarClasses = [
+    'bg-secondary',
+    'text-light'
+];
 
 @Injectable()
 export class HeroEffects {
-    constructor(private actions$: Actions, private heroService: HeroService) {}
+    constructor(private actions$: Actions, private heroService: HeroService, private snackBar: MatSnackBar) {}
 
     geHeroes$ = createEffect(() =>
         this.actions$.pipe(
             ofType(HeroActions.getAllHeroes),
-            mergeMap(() =>
+            switchMap(() =>
                 this.heroService.getAll().pipe(
                     map((heroes) => {
                         return HeroActions.getAllHeroesCompleted({
@@ -61,7 +69,7 @@ export class HeroEffects {
     updateHero$ = createEffect(() =>
         this.actions$.pipe(
             ofType(HeroActions.updateHero),
-            mergeMap((data) => {
+            switchMap((data) => {
                 return this.heroService.update(data.hero.id, data.hero).pipe(
                     map(() => {
                         return HeroActions.updateHeroCompleted({
@@ -85,7 +93,7 @@ export class HeroEffects {
     addHero$ = createEffect(() =>
         this.actions$.pipe(
             ofType(HeroActions.addHero),
-            mergeMap((data) => {
+            switchMap((data) => {
                 return this.heroService.create(data.hero).pipe(
                     map(() => {
                         return HeroActions.addHeroCompleted({
@@ -106,11 +114,19 @@ export class HeroEffects {
         )
     );
 
-    addHeroCompleted = createEffect(() =>
+    addHeroSuccess$ = createEffect(() =>
         this.actions$.pipe(
             ofType(HeroActions.addHeroCompleted),
-            map(() => {
-                return HeroActions.getAllHeroes({});
+            filter((x) => x.state === CompletionState.Success),
+            map((data) => {
+                this.snackBar.open(`Hero ${data.data.name} added!`, '', {
+                    duration: 2000,
+                    panelClass: [
+                        ...snackbarClasses
+                    ]
+                });
+
+                return HeroActions.addHeroInit();
             })
         )
     );
