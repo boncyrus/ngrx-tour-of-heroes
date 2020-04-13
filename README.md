@@ -7,7 +7,7 @@ A simple tour of heroes app.
 - Update hero
 - View heroes
 
-# Technology used
+# Technologies used
 - Angular 8
 - Angular Material - Controls
 - Bootstrap 4 - Layout
